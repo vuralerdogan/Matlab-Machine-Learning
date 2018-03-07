@@ -1,6 +1,9 @@
+load seeddata.mat
+labels = d(:,8)
+data = d(:,1:7)
 normalisationdata= (data - mean(data).* ones(210,1))./std(data)
 % labels and seed data must be added!!!!. 
-%enable netlab and run first PCA.
+% enable netlab and run first PCA.
 
 
 % sigma = cov(normalisationdata)
@@ -18,6 +21,4 @@ h2=plot(projdata(labels==2,1),projdata(labels==2,2),'b.');
 h1=plot(projdata(labels==3,1),projdata(labels==3,2),'y.');
 
 set(gca, 'Box','on');
-
-rand('state', 0);
-perm=perm(projdata)
+run Practice1Kmeancls.m

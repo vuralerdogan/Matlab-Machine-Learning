@@ -1,3 +1,5 @@
+load seeddata.mat
+data = d(:,1:7)
 normalisationdata= (data - mean(data).* ones(210,1))./std(data)
 [pcvals, pcvecs] = pca(normalisationdata)
 projdata = normalisationdata*pcvecs(:,1:2)
@@ -5,7 +7,8 @@ rand('state', 5)
 figure(1)
 plot(projdata(:, 1), projdata(:, 2), 'ro')
 ndata = size(normalisationdata, 1);
-ncentres = 5 %if you choose five then it will cluster as five. 
+ncentres = 5
+%if you choose three then it will cluster as three. 
 %Remember to edit last plot code.
 perm = randperm(ndata);
 perm = perm(1:ncentres);
