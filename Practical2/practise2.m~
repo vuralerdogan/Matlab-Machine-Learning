@@ -1,0 +1,9 @@
+image=imread('resim.tiff')
+image=double(image)
+
+m = mean(image)
+s = std(image)
+ndata = (image-m.*ones(512))./s
+
+[pcvalues, pcvectors]=pca(ndata)
+projdata10= ndata*pcvectors(:,1:10)
