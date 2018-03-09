@@ -1,7 +1,7 @@
 load seeddata.mat
 labels = d(:,8)
 data = d(:,1:7)
-normalisationdata= (data - mean(data).* ones(210,1))./std(data)
+normalisationdata = (data - mean(data).* ones(210,1))./std(data)
 % labels and seed data must be added!!!!. 
 % enable netlab and run first PCA.
 

@@ -1,0 +1,21 @@
+load dataOIL.mat
+newDataTrn = 2*(DataTrn-min(DataTrn(:)))./(max(DataTrn(:))-min(DataTrn(:)))-1
+newDataTst = 2*(DataTst-min(DataTst(:)))./(max(DataTst(:))-min(DataTst(:)))-1
+
+%checking data
+min(newDataTrn(:))
+max(newDataTrn(:))
+min(newDataTst(:))
+max(newDataTst(:))
+
+[pcvalues, pcvectors]= pca(newDataTrn);
+projdata = newDataTrn * pcvectors(:,1:2)
+[pcvalues2, pcvectors2]= pca(newDataTst);
+projdata2 = newDataTrn * pcvectors2(:,1:2)
+Labels1=DataTrnLbls[:,1]
+Labels2=DataTrnLbls[:,2]
+
+figure(2)
+hold on;
+plot(projdata(:,1),projdata(:,2),'r.')
+plot(projdata2(:,1), projdata2(:,2),'b.')

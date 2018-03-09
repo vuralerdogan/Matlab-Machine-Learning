@@ -3,7 +3,7 @@ data = d(:,1:7)
 normalisationdata= (data - mean(data).* ones(210,1))./std(data)
 [pcvals, pcvecs] = pca(normalisationdata)
 projdata = normalisationdata*pcvecs(:,1:2)
-rand('state', 5) 
+rand('state', 0) 
 figure(1)
 plot(projdata(:, 1), projdata(:, 2), 'ro')
 ndata = size(normalisationdata, 1);
@@ -34,6 +34,7 @@ legend('Class 1', 'Class 2', 'Class 3','Cluster 1', 'Cluster 2', 'Cluster 3','Cl
 plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth', 2, 'MarkerSize', 8)
 
 figure(3)
+%foptions edited for summing errors.
 plot(e, 'r-')
 xlabel('Iteration')
 ylabel('Quantisation error')
