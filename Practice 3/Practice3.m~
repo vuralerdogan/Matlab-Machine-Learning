@@ -1,6 +1,6 @@
-load dataOIL.mat
-newDataTrn = 2*(DataTrn-min(DataTrn(:)))./(max(DataTrn(:))-min(DataTrn(:)))-1
-newDataTst = 2*(DataTst-min(DataTst(:)))./(max(DataTst(:))-min(DataTst(:)))-1
+load oil.mat
+newDataTrn = 2*(trndata-min(trndata(:)))./(max(trndata(:))-min(trndata(:)))-1
+newDataTst = 2*(tstdata-min(tstdata(:)))./(max(tstdata(:))-min(tstdata(:)))-1
 
 %checking data
 min(newDataTrn(:))
@@ -12,10 +12,22 @@ max(newDataTst(:))
 projdata = newDataTrn * pcvectors(:,1:2)
 [pcvalues2, pcvectors2]= pca(newDataTst);
 projdata2 = newDataTrn * pcvectors2(:,1:2)
-Labels1=DataTrnLbls[:,1]
-Labels2=DataTrnLbls[:,2]
+
+
+
 
 figure(2)
 hold on;
-plot(projdata(:,1),projdata(:,2),'r.')
-plot(projdata2(:,1), projdata2(:,2),'b.')
+%Train Label and its projection
+
+plot(projdata(trnlabels==1,1),projdata(trnlabels==1,2),'b.')
+plot(projdata(trnlabels==2,1),projdata(trnlabels==2,2),'r.')
+plot(projdata(trnlabels==3,1),projdata(trnlabels==,2),'c.')
+
+%Test Label and its projection
+plot(projdata2(Test1==1,1), projdata2(Test1==1,2),'b*')
+plot(projdata2(Test2==1,1), projdata2(Test2==1,2),'r*')
+plot(projdata2(Test3==1,1), projdata2(Test3==1,2),'c*')
+
+
+savefig('Task 3')
