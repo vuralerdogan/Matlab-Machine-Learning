@@ -12,7 +12,7 @@ wronglabel = predicted1(order_misclass,:)
 %seperating data
 data = trainingset1(:,2:13)
 label = trainingset1(:,1)
-%normalisation and PCA
+%extra normalisation and PCA
 normalisationdata = (data - mean(data).* ones(667,1))./std(data)
 mn = mean(normalisationdata)
 st = std(normalisationdata)
@@ -24,6 +24,7 @@ hold on;
 h1=plot(projdata(label==1,1),projdata(label==1,2),'r.');
 h2=plot(projdata(label==2,1),projdata(label==2,2),'b.');
 h3=plot(projdata(label==3,1),projdata(label==3,2),'g.');
+
 %normalisation of testdata
 testdata=testset1
 normtestdata = (testdata - mean(testdata).* ones(333,1))./std(testdata)

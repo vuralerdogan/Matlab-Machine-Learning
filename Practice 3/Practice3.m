@@ -5,6 +5,7 @@ newDataTst = 2*(tstdata-min(tstdata(:)))./(max(tstdata(:))-min(tstdata(:)))-1
 %checking data
 min(newDataTrn(:))
 max(newDataTrn(:))
+
 min(newDataTst(:))
 max(newDataTst(:))
 
