@@ -18,14 +18,14 @@ figure(2)
 hold on;
 h1=plot(projdata(labels==1,1),projdata(labels==1,2),'r.');
 h2=plot(projdata(labels==2,1),projdata(labels==2,2),'b.');
-h1=plot(projdata(labels==3,1),projdata(labels==3,2),'g.');
+h3=plot(projdata(labels==3,1),projdata(labels==3,2),'g.');
 set(gca, 'Box','on');
 
 figure(5)
 hold on;
 h1=plot(projdata(labels==1,1),projdata(labels==1,2),'r.');
 h2=plot(projdata(labels==2,1),projdata(labels==2,2),'b.');
-h1=plot(projdata(labels==3,1),projdata(labels==3,2),'g.');
+h3=plot(projdata(labels==3,1),projdata(labels==3,2),'g.');
 set(gca, 'Box','on');
 
 run Practice1Kmeancls5.m
