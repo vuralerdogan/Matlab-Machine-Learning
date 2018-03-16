@@ -1,23 +1,31 @@
+%% TASK 5: MISCLASSIFICATION ANALYSING
+% As a summary, we obtained a predicted value from task 4. We try to
+% compare real classes of the data with predicted classes.
+
+%% Detection of Misclassification
 load data.mat
 load svmdata.mat
 % finding misclassifications
-compare = testset1(:,1)
-testset1 = testset1(:,2:13)
-result = predicted1 ~=compare
+compare = testset1(:, 1);
+testset1 = testset1(:, 2:13);
+result = predicted1 ~=compare;
 order_misclass = find(result)
 % combining with the labels
 reallabel = compare(order_misclass,:)
 wronglabel = predicted1(order_misclass,:)
 
+%% PCA and Normalisation
+
 % seperating data
-normalisationdata = trainingset1(:,2:13)
-label = trainingset1(:,1)
+normalisationdata = trainingset1(:,2:13);
+label = trainingset1(:,1);
 
 % PCA
-mn = mean(normalisationdata)
-st = std(normalisationdata)
+mn = mean(normalisationdata);
+st = std(normalisationdata);
 [pcvals, pcvecs] = pca(normalisationdata)
-projdata = normalisationdata*pcvecs(:,1:2)
+projdata = normalisationdata*pcvecs(:,1:2);
+%% PCA for 1st and 2nd columns
 
 figure(5)
 hold on;
@@ -26,10 +34,10 @@ h2=plot(projdata(label==2,1),projdata(label==2,2),'b.');
 h3=plot(projdata(label==3,1),projdata(label==3,2),'g.');
 
 % Proj test data
-normtestdata=testset1
+normtestdata=testset1;
 % proj data
-mis_class = normtestdata(order_misclass,:)
-projclass = mis_class*pcvecs(:,1:2)
+mis_class = normtestdata(order_misclass,:);
+projclass = mis_class*pcvecs(:,1:2);
 
 % plotting misclassification
 % since only same class, '1' ,misclassified we prefer to show only this.
@@ -44,12 +52,57 @@ h4=plot(projclass(wronglabel==1,1),projclass(wronglabel==1,2),'r*');
 h8=plot(projclass(reallabel==2,1),projclass(reallabel==2,2),'bo');
 h9=plot(projclass(reallabel==3,1),projclass(reallabel==3,2),'go');
 
-legend('Class 1', 'Class 2', 'Class 3','Misclas.', 'Real class', 'Real class')
+legend('Class 1', 'Class 2', 'Class 3','Misclas.', ...
+    'Real class', 'Real class')
 set(gca, 'Box','on');
-xlabel('First principal component','fontsize',12,'fontweight','bold','color','b')
-ylabel('Second principal component','fontsize',12,'fontweight','bold','color','b')
+xlabel('First principal component','fontsize',12,'fontweight',...
+    'bold','color','b')
+ylabel('Second principal component','fontsize',12,'fontweight',...
+    'bold','color','b')
 title('Missclassifications of Test Data','fontsize',16,'fontweight','bold')
+%% PCA for 2nd and 3rd Colums.
+projdata2 = normalisationdata*pcvecs(:,2:3);
+projclass2 = mis_class*pcvecs(:,2:3);
 
+% Proj test data
+normtestdata=testset1;
+% proj data
+mis_class = normtestdata(order_misclass,:);
+projclass = mis_class*pcvecs(:,1:2);
+
+
+figure(4)
+hold on;
+h1=plot(projdata2(label==1,1),projdata2(label==1,2),'r.');
+h2=plot(projdata2(label==2,1),projdata2(label==2,2),'b.');
+h3=plot(projdata2(label==3,1),projdata2(label==3,2),'g.');
+
+h4=plot(projclass2(wronglabel==1,1),projclass2(wronglabel==1,2),'r*');
+h8=plot(projclass2(reallabel==2,1),projclass2(reallabel==2,2),'bo');
+h9=plot(projclass2(reallabel==3,1),projclass2(reallabel==3,2),'go');
+
+legend('Class 1', 'Class 2', 'Class 3','Misclas.', ...
+    'Real class', 'Real class')
+set(gca, 'Box','on');
+xlabel('Second principal component','fontsize',12,'fontweight',...
+    'bold','color','b')
+ylabel('Third principal component','fontsize',12,'fontweight',...
+    'bold','color','b')
+title('Misclassifications of Test Data','fontsize'...
+,16,'fontweight','bold')
+%% Result
+% As we can see, 6 misclassifications have been found. We plotted it, first,
+% on the first and second components to answer that why they are
+% misclassified. Then, we plotted second and third. Even if first and
+% second components are so important for PCA, we should look the other
+% components. Sometimes, components' 'pc values' can be close each other. In our
+% example, they were '1', '0.6', '0.4' respectively. Therefore, choosing
+% these three help us to observe clearly. 
+
+% Cross-validation success was %97 that shows misclassification can 
+% be observed. Even %100 might show some misclassifications. Since the test
+% data is unknown, we are not able to draw boundries %100. That is the
+% reason of misclassification.
 
 
 
