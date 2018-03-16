@@ -13,7 +13,8 @@ ncentres = 5
 perm = randperm(ndata);
 perm = perm(1:ncentres);
 centres = projdata(perm, :);
-hold on; plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth', 2,'MarkerSize', 8)
+hold on; plot(centres(:, 1), centres(:,2), 'k+',...
+'LineWidth', 2,'MarkerSize', 8)
 
 options = foptions;
 options(1) = 1; % Prints out error values.
@@ -30,8 +31,10 @@ plot(projdata(membership==4,1), projdata(membership==4,2), 'ko');
 plot(projdata(membership==5,1), projdata(membership==5,2), 'co');
 
 set(gca, 'Box', 'on')
-legend('Class 1', 'Class 2', 'Class 3','Cluster 1', 'Cluster 2', 'Cluster 3','Cluster 4', 'Cluster 5')
-plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth', 2, 'MarkerSize', 8)
+legend('Class 1', 'Class 2', 'Class 3','Cluster 1', ...
+'Cluster 2', 'Cluster 3','Cluster 4', 'Cluster 5')
+plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth'...
+, 2, 'MarkerSize', 8)
 
 figure(3)
 %foptions edited for summing errors.

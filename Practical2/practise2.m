@@ -16,8 +16,6 @@ ndata = ((image-m.*ones(512))./s);
 [pcvalues, pcvectors]=pca(ndata);
 
 
-
-
 %% Projection of First 10 Components
 projdata10 = ndata*pcvectors(:,1:10); % image compressing with first 10 components
 org10= projdata10*transpose(pcvectors(:,1:10)); 
@@ -26,18 +24,12 @@ imshow(org10, []);
 title('Projection of First 10 components')
 
 
-
-
-
 %% Projection of First 20 Components
 projdata20 = ndata*pcvectors(:,1:20); % image compressing with first 20 components
 org20= projdata20*transpose(pcvectors(:,1:20));
 figure(3)
 imshow(org20, []);
 title('Projection of First 20 components')
-
-
-
 
 
 
