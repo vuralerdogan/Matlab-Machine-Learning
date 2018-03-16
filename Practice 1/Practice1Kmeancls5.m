@@ -1,8 +1,8 @@
 load seeddata.mat
-data = d(:,1:7)
-normalisationdata= (data - mean(data).* ones(210,1))./std(data)
-[pcvals, pcvecs] = pca(normalisationdata)
-projdata = normalisationdata*pcvecs(:,1:2)
+data = d(:,1:7);
+normalisationdata= (data - mean(data).* ones(210,1))./std(data);
+[pcvals, pcvecs] = pca(normalisationdata);
+projdata = normalisationdata*pcvecs(:,1:2);
 rand('state', 1) % creating same random numbers for '1' settings 
 
 figure(1)

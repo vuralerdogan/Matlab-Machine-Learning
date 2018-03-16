@@ -1,11 +1,16 @@
+%% K-mean for 3-cluster
 load seeddata.mat
 % seperating and normalising the data
-data = d(:,1:7)
+data = d(:,1:7);
 normalisationdata= (data - mean(data).* ones(210,1))./std(data);
 [pcvals, pcvecs] = pca(normalisationdata);
 % projection of data
 projdata = normalisationdata*pcvecs(:,1:2);
 rand('state', 1); % creating same random numbers for '1' settings
+%% Unlabelled Data with Random Centres
+% K-mean, first, chooses random centres then uses voronoi tesellation. For
+% every each step, K-mean implements same iterations except random center
+% choosing until learning stops.
 
 figure(4)
 plot(projdata(:, 1), projdata(:, 2), 'ro');
@@ -21,6 +26,7 @@ perm = perm(1:ncentres);
 centres = projdata(perm, :);
 hold on; plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth', 2,'MarkerSize', 8)
 legend('Unlabelled data', 'Random centres')
+%% 3-Clustered Data
 
 options = foptions;
 options(1) = 1; % Prints out error values.
@@ -37,12 +43,20 @@ plot(projdata(membership==3,1), projdata(membership==3,2), 'go');
 set(gca, 'Box', 'on')
 plot(centres(:, 1), centres(:,2), 'k+', 'LineWidth', 2, 'MarkerSize', 8)
 legend('Class 1', 'Class 2', 'Class 3','Cluster 1', 'Cluster 2', 'Cluster 3','Random centres','Location', 'southeast')
+%% Quantisation Error
 
 figure(6)
 plot(e, 'r-')
 xlabel('Iteration')
 ylabel('Quantisation error')
 title('Sum of Quantisation error: 3-cluster','fontsize',16,'fontweight','bold')
+
+% As we can see, 3-cluster's quantisation error is greater than
+% 5-cluster's. Therefore, it is better to choose 5-cluster to achieve
+% efficient clustering.
+
+
+
 
 % The below codes already written in kmeans.m file to sum quantisation errors.
 
