@@ -9,6 +9,8 @@ image=double(image);  % converting double
 figure(1)
 imshow('resim.tiff') % checking by showing 
 title('Original Image')
+%% Normalisation and PCA
+
 % normalisation of image matrix.
 m = mean(image);
 s = std(image);

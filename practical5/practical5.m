@@ -11,6 +11,9 @@ testset1 = testset1(:, 2:13);
 result = predicted1 ~=compare;
 order_misclass = find(result)
 % combining with the labels
+%
+%
+%
 reallabel = compare(order_misclass,:)
 wronglabel = predicted1(order_misclass,:)
 
@@ -23,7 +26,8 @@ label = trainingset1(:,1);
 % PCA
 mn = mean(normalisationdata);
 st = std(normalisationdata);
-[pcvals, pcvecs] = pca(normalisationdata)
+[pcvals, pcvecs] = pca(normalisationdata);
+pcvals = pcvals
 projdata = normalisationdata*pcvecs(:,1:2);
 %% PCA for 1st and 2nd columns
 
@@ -91,19 +95,35 @@ ylabel('Third principal component','fontsize',12,'fontweight',...
 title('Misclassifications of Test Data','fontsize'...
 ,16,'fontweight','bold')
 %% Result
-% As we can see, 6 misclassifications have been found. We plotted it, first,
+% As we can see, 6 misclassifications have been found. First, we plotted it
 % on the first and second components to answer that why they are
 % misclassified. Then, we plotted second and third. Even if first and
-% second components are so important for PCA, we should look the other
-% components. Sometimes, components' 'pc values' can be close each other. In our
-% example, they were '1', '0.6', '0.4' respectively. Therefore, choosing
-% these three help us to observe clearly. 
-
+% second components are so important for PCA, we should check the other
+% components. Sometimes, components' 'pc values' can be close to each
+% other. In this example, they were '1', '0.6', '0.4' respectively. 
+% Therefore, plotting these three combination contributed us 
+% to clarify why the 6 points has been misclassified. 
+%
 % Cross-validation success was %97 that shows misclassification can 
 % be observed. Even %100 might show some misclassifications. Since the test
 % data is unknown, we are not able to draw boundries %100. That is the
 % reason of misclassification.
-
+%% References
+% [1] I. T. Nabney: Netlab Algorithms for Pattern Recognition, 
+% Springer, 2002.
+%
+% [2] Chang, C.-C., and Lin, C.-J. LIBSVM: a library for support vector 
+% machines. ACM Transactions on Intelligent Systems and 
+% Technology 2, 27 (2011), 1?27.
+%
+% [3] Hsu, C. W., Chang, C. C., and Lin, C. J. A practical 
+% guide to support vector classification. Tech. rep., Taipei, 2016.
+%
+% [4] C. M.Bishop. (1995) Neural Networks for Pattern Recognition. 
+% Oxford University Press, New York.
+%
+% [5] Yi Sun (2013) Neural Networks and Machine Learning Course, 
+% University of Hertfordshire.
 
 
 
